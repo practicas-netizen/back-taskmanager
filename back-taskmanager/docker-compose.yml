@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  mysql-db:
+    image: mysql:8.0
+    container_name: tickets-mysql-jordi
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: jordipassword2026
+      MYSQL_DATABASE: jordi_tickets_db       
+      MYSQL_USER: jordi_admin                 
+      MYSQL_PASSWORD: jordipassword2026      
+    ports:
+      - "3306:3306"
+    volumes:
+      - jordi_mysql_data:/var/lib/mysql
+
+volumes:
+  jordi_mysql_data: {} 
