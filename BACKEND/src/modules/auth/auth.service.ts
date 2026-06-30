@@ -14,27 +14,27 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async login(email: string, password: string) {
+  async login(username: string, password: string) {
 
-    // Buscamos el usuario por email
-    const user = await this.userRepository.findOne({ where: { email } });
+    // Buscamos el usuario por usuario
+    const user = await this.userRepository.findOne({ where: { username } });
 
     // Si no existe lanzamos error
     if (!user) {
-      throw new UnauthorizedException('Email o contraseña incorrectos');
+      throw new UnauthorizedException('Usuario o contraseña incorrectos');
     }
 
     // Comparamos la contraseña con el hash guardado en la BD
     const passwordValida = await bcrypt.compare(password, user.password);
 
     if (!passwordValida) {
-      throw new UnauthorizedException('Email o contraseña incorrectos');
+      throw new UnauthorizedException('Usuario o contraseña incorrectos');
     }
 
     // Creamos el token JWT con los datos básicos del usuario
     const payload = {
       id: user.id,
-      email: user.email,
+      username: user.username,
       permissions: user.permissions,
       department: user.department,
       position: user.position,
@@ -46,7 +46,7 @@ export class AuthService {
         id: user.id,
         name: user.name,
         lastName: user.lastName,
-        email: user.email,
+        username: user.username,
         permissions: user.permissions,
         department: user.department,
         position: user.position,

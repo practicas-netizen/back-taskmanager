@@ -18,8 +18,12 @@ export class User {
   @Column()
   lastName!: string;
 
-  @ApiProperty({ example: 'jordi@empresa.com' })
+  @ApiProperty({ example: 'jmora' })
   @Column({ unique: true })
+  username!: string;
+
+  @ApiProperty({ example: 'jordi@empresa.com' })
+  @Column({ unique: true, nullable: true })
   email!: string;
 
   @ApiProperty({ example: '123456' })
