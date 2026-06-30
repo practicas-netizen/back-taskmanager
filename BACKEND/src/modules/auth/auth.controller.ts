@@ -1,12 +1,12 @@
 import { Controller, Post, Body } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiBody } from '@nestjs/swagger';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsUsername, IsString, IsNotEmpty } from 'class-validator';
+import { IsString, IsNotEmpty } from 'class-validator';
 import { AuthService } from './auth.service';
 
 class LoginDto {
-  @ApiProperty({ example: 'jordi.test@empresa.com' })
-  @IsUsername()
+  @ApiProperty({ example: 'jmora' })
+  @IsString()
   username: string;
 
   @ApiProperty({ example: '123456' })

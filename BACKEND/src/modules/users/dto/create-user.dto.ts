@@ -4,7 +4,6 @@ import {
   IsBoolean,
   IsDateString,
   IsEmail,
-  IsUsername,
   IsEnum,
   IsNotEmpty,
   IsOptional,
@@ -25,12 +24,13 @@ export class CreateUserDto {
   lastName!: string;
 
   @ApiProperty({ example: 'jmora' })
-  @IsUsername()
+  @IsString()
+  @IsNotEmpty()
   username!: string;
 
   @ApiProperty({ example: 'jordi@empresa.com' })
   @IsEmail({}, { message: 'El correo electronico debe ser valido' })
-  email?: string;
+  email!: string;
 
   @ApiProperty({ example: '123456' })
   @IsString()

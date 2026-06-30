@@ -42,7 +42,7 @@ export class UsersService {
 
   async create(createUserDto: CreateUserDto): Promise<UserResponse> {
     const exists = await this.userRepository.findOne({
-      where: { email: createUserDto.email },
+      where: { username: createUserDto.username },
     });
     if (exists) {
       throw new ConflictException('Ya existe un empleado con ese email');
@@ -105,7 +105,7 @@ export class UsersService {
     const saved = await this.userRepository.save(user);
 
     await this.mailService.sendUserUpdated(
-      saved.email,
+      saved.email ?? '',
       `${saved.name} ${saved.lastName}`,
       saved.position,
       saved.department,
